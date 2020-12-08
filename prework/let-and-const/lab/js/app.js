@@ -1,38 +1,38 @@
-"use strict";
+'use strict';
 
 const names = [
-  "bag",
-  "banana",
-  "bathroom",
-  "boots",
-  "breakfast",
-  "bubblegum",
-  "chair",
-  "cthulhu",
-  "dog-duck",
-  "dragon",
-  "pen",
-  "pet-sweep",
-  "scissors",
-  "shark",
-  "sweep",
-  "tauntaun",
-  "unicorn",
-  "usb",
-  "water-can",
-  "wine-glass",
+  'bag',
+  'banana',
+  'bathroom',
+  'boots',
+  'breakfast',
+  'bubblegum',
+  'chair',
+  'cthulhu',
+  'dog-duck',
+  'dragon',
+  'pen',
+  'pet-sweep',
+  'scissors',
+  'shark',
+  'sweep',
+  'tauntaun',
+  'unicorn',
+  'usb',
+  'water-can',
+  'wine-glass',
 ];
 
-const leftImage = document.getElementById("left");
-const centerImage = document.getElementById("center");
-const rightImage = document.getElementById("right");
+const leftImage = document.getElementById('left');
+const centerImage = document.getElementById('center');
+const rightImage = document.getElementById('right');
 
 let allProducts = [];
-const container = document.getElementById("image_container");
+const container = document.getElementById('image_container');
 const viewed = [];
 const labels = [];
 const pics = [leftImage, centerImage, rightImage];
-const list = document.getElementById("productlist");
+const list = document.getElementById('productlist');
 let totalClicks = 0;
 const views = [];
 const votes = [];
@@ -70,13 +70,13 @@ function displayPics() {
 }
 
 function handleClick(event) {
-  if (event.target.id === "image_container") {
-    return alert("Be sure to click directly on an image!!");
+  if (event.target.id === 'image_container') {
+    return alert('Be sure to click directly on an image!!');
   }
   totalClicks += 1;
   if (totalClicks > 24) {
-    container.removeEventListener("click", handleClick);
-    container.style.display = "none";
+    container.removeEventListener('click', handleClick);
+    container.style.display = 'none';
     showList();
     makeChart();
   }
@@ -97,7 +97,7 @@ function handleClick(event) {
 
 function showList() {
   for (let i = 0; i < allProducts.length; i++) {
-    const liEl = document.createElement("li");
+    const liEl = document.createElement('li');
     liEl.textContent = `${allProducts[i].name} has
       ${allProducts[i].votes} votes in
       ${allProducts[i].views} views`;
@@ -115,17 +115,17 @@ function makeChartData() {
 
 function makeChart() {
   makeChartData();
-  const ctx = document.getElementById("chartypants").getContext("2d");
+  const ctx = document.getElementById('chartypants').getContext('2d');
   new Chart(ctx, {
     //eslint-disable-line
-    type: "bar",
+    type: 'bar',
     data: {
       labels: labels,
       datasets: [
         {
-          label: "total votes",
-          backgroundColor: "gold",
-          borderColor: "#214",
+          label: 'total votes',
+          backgroundColor: 'gold',
+          borderColor: '#214',
           data: votes,
         },
       ],
@@ -145,22 +145,22 @@ function makeChart() {
       },
     },
   });
-  Chart.defaults.global.defaultFontColor = "#eee"; //eslint-disable-line
+  Chart.defaults.global.defaultFontColor = '#eee'; //eslint-disable-line
 }
 
-container.addEventListener("click", handleClick);
+container.addEventListener('click', handleClick);
 
-document.getElementById("bus").addEventListener("click", function () {
-  localStorage.removeItem("busmall");
-  console.log("Local storage was cleared!");
+document.getElementById('bus').addEventListener('click', function () {
+  localStorage.removeItem('busmall');
+  console.log('Local storage was cleared!');
 });
 
 if (localStorage.busmall) {
-  console.log("Local storage data exists");
+  console.log('Local storage data exists');
   allProducts = JSON.parse(localStorage.busmall);
 } else {
   console.log(
-    "There is no local storage data; initialize app by creating instances"
+    'There is no local storage data; initialize app by creating instances'
   );
   for (let i = 0; i < names.length; i++) {
     new Product(names[i]);
